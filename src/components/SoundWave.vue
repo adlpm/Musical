@@ -19,7 +19,7 @@ export default {
 }
 
 .bar {
-  background: #e20074;
+  background: rgb(144, 0, 211);
   bottom: 1px;
   height: 50px;
   position: absolute;

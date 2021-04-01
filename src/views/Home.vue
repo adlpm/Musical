@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="logo">
-      <img src="../assets/images/songpe.png" alt="Logo" />
+      <img src="../assets/images/logo.png" alt="Logo" />
     </div>
     <div class="buttons">
       <router-link to="/game" class="game">Jogar</router-link>
@@ -28,11 +28,7 @@ export default {
 .home {
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(
-    268.44deg,
-    rgb(255, 255, 255) 0.26%,
-    rgb(156, 177, 197) 98.86%
-  );
+  background: linear-gradient(180deg, rgb(86, 19, 194) 0%, rgb(0, 0, 0) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,17 +54,21 @@ export default {
   padding: 0.8rem 5rem;
   border-radius: 0.4rem;
   border: none;
-  background: #94c1ea;
+  background: #b742d4;
   color: #ffffff;
   cursor: pointer;
   outline: 0;
   text-decoration: none;
   display: flex;
   justify-content: center;
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  font-family: "Circular-Loom";
+  font-size: large;
 }
 
 .buttons .game:hover {
-  background: #78a1c7;
+  background: #9934b3;
+  box-shadow: 0 0 16px rgb(255, 255, 255);
 }
 
 .buttons .score {
@@ -80,9 +80,12 @@ export default {
   cursor: pointer;
   outline: 0;
   text-decoration: none;
+  font-family: "Circular-Loom";
+  font-size: large;
 }
 
 .buttons .score:hover {
   background: #8969b3;
+  box-shadow: 0 0 16px rgb(255, 255, 255);
 }
 </style>
