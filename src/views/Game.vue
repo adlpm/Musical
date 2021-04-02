@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import song from "@/assets/musics/ac-dc.mp3";
+import song from "@/assets/musics/other_californication.wav";
 import { mapState } from "vuex";
 
 export default {
