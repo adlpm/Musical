@@ -29,6 +29,7 @@ export default {
       this.$router.push("/game");
     },
     selectRandomMusics() {
+      //Comentario
       const totalMusics = 2;
       const selectedMusics = [];
       for (let i = 0; i < totalMusics; i++) {
