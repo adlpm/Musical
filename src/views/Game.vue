@@ -1,43 +1,44 @@
 <template>
   <div class="game">
-    <div class="score">
-      {{ score }}
-    </div>
+    <div class="score">{{ score }}</div>
 
-    <div class="time">
-      {{ count }}
-    </div>
+    <div class="time">{{ count }}</div>
 
     <div class="options">
-      <button @click="pauseSong(false, $event)">Guns N Roses</button>
-      <button @click="pauseSong(true, $event)">AC/DC</button>
-      <button @click="pauseSong(false, $event)">Aerosmith</button>
-      <button @click="pauseSong(false, $event)">Pantera</button>
+      <button
+        @click="optionClicked(option, $event)"
+        v-for="option in options"
+        :key="option.title"
+      >{{ option.title }}</button>
     </div>
   </div>
 </template>
 
 <script>
-import song from "@/assets/musics/other_californication.wav";
+// import song from "@/assets/musics/other_californication.wav";
 import { mapState } from "vuex";
+//import musics from '@/assets/musics/musicas.json'
 
 export default {
   data() {
     return {
+      currentLevel: 0,
       music: null,
       isPlaying: false,
       count: 0,
       score: 20000,
+      options: [],
     };
   },
   mounted() {
-    this.playSong();
+    this.loadCurrentLevel();
   },
-  computed: mapState(["scores"]),
+  computed: mapState(["scores","selectedMusics"]),
   methods: {
-    playSong() {
-      this.music = new Audio(song);
+    loadLevel(levelInfo) {
+      this.music = new Audio(levelInfo.path);
       this.music.play();
+      this.options = levelInfo.options;
       this.isPlaying = true;
       const self = this;
       setInterval(function () {
@@ -47,15 +48,26 @@ export default {
         }
       }, 1000);
       setTimeout(function () {
-        self.pauseSong();
+        self.optionClicked();
       }, 20000);
     },
-    pauseSong(bool, event) {
+    loadCurrentLevel() {
+      if (this.currentLevel < this.selectedMusics.length) {
+        this.loadLevel(this.selectedMusics[this.currentLevel]);
+        return;
+      }
+      this.$router.push("/score");
+    },
+    optionClicked(option, event) {
       console.log(event);
-      if (this.isPlaying) {
+      if (this.isPlaying && option.rightOption != undefined) {
         this.music.pause();
         this.isPlaying = false;
-        this.musicVerification(bool, event);
+        this.musicVerification(true, event);
+        this.currentLevel++;
+        setTimeout(() => {
+          this.loadCurrentLevel();
+        }, 1000); 
       }
     },
     musicVerification(bool, event) {

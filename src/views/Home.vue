@@ -4,7 +4,8 @@
       <img src="../assets/images/logo.png" alt="Logo" />
     </div>
     <div class="buttons">
-      <router-link to="/game" class="game">Jogar</router-link>
+      <!-- <router-link to="/game" class="game">Jogar</router-link> -->
+      <button class="game" @click="toGame">Jogar</button>
 
       <router-link to="/score" class="score">Pontuação</router-link>
     </div>
@@ -15,11 +16,34 @@
 
 <script>
 import SoundWave from "@/components/SoundWave.vue";
+import musics from '@/assets/musics/musicas.json'
 
 export default {
   name: "Home",
   components: {
     SoundWave,
+  },
+  methods: {
+    toGame() {
+      this.selectRandomMusics();
+      this.$router.push("/game")
+    },
+    selectRandomMusics() {
+      const totalMusics = 2
+      const selectedMusics = [];
+      for (let i = 0; i < totalMusics; i++) {
+        const randomNum = Math.floor(Math.random() * this.musics.length);
+        selectedMusics.push(this.musics[randomNum]);
+        this.musics.splice(randomNum, 1);
+      }
+      this.$store.commit("setSelectedMusics",selectedMusics);
+
+    },
+  },
+  data() {
+    return {
+      musics: musics,
+    }
   },
 };
 </script>

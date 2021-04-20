@@ -1,0 +1,68 @@
+[
+  {
+    "path":"https://github.com/adlpm/Musical/blob/main/src/assets/musics/ac-dc.mp3?raw=true",
+    "options": [
+      {
+        "title":"Number of the Beast",
+        "artist": "Iron Maiden",
+        "rightOption": true
+      },
+      {
+        "title": "aaaaaa",
+        "artist": "artist_aaaa"
+      },
+      {
+        "title": "bbbbbb",
+        "artist": "artist_bbbbbb"
+      },
+      {
+        "title": "ccccc",
+        "artist": "artist_ccccc"
+      }
+    ]
+  },
+  {
+    "path":"https://github.com/adlpm/Musical/blob/main/src/assets/musics/vocals_WakeMeUpWhenSeptember.wav?raw=true",
+    "options": [
+      {
+        "title":"Wake me up when september ends",
+        "artist": "Green Day",
+        "rightOption": true
+      },
+      {
+        "title": "ddddd",
+        "artist": "artist_dddd"
+      },
+      {
+        "title": "eeeee",
+        "artist": "artist_eeee"
+      },
+      {
+        "title": "fffffff",
+        "artist": "artist_fffff"
+      }
+    ]
+  },
+  {
+    "path":"https://github.com/adlpm/Musical/blob/main/src/assets/musics/other_californication.wav?raw=true",
+    "options": [
+      {
+        "title":"Californication",
+        "artist": "Red Hot Chili Peppers",
+        "rightOption": true
+      },
+      {
+        "title": "ddddd",
+        "artist": "artist_dddd"
+      },
+      {
+        "title": "eeeee",
+        "artist": "artist_eeee"
+      },
+      {
+        "title": "fffffff",
+        "artist": "artist_fffff"
+      }
+    ]
+  }
+]
