@@ -30,6 +30,7 @@ export default {
     },
     selectRandomMusics() {
       //comentario teste
+      //Comentario
       const totalMusics = 2;
       const selectedMusics = [];
       for (let i = 0; i < totalMusics; i++) {
