@@ -19,7 +19,7 @@ export default new Vuex.Store({
     },
     setSelectedMusics(state, selectedMusics) {
       state.selectedMusics = selectedMusics;
-    }
+    },
   },
   actions: {},
   modules: {},

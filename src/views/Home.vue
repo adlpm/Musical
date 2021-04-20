@@ -16,7 +16,7 @@
 
 <script>
 import SoundWave from "@/components/SoundWave.vue";
-import musics from '@/assets/musics/musicas.json'
+import musics from "@/assets/musics/musicas.json";
 
 export default {
   name: "Home",
@@ -26,24 +26,23 @@ export default {
   methods: {
     toGame() {
       this.selectRandomMusics();
-      this.$router.push("/game")
+      this.$router.push("/game");
     },
     selectRandomMusics() {
-      const totalMusics = 2
+      const totalMusics = 2;
       const selectedMusics = [];
       for (let i = 0; i < totalMusics; i++) {
         const randomNum = Math.floor(Math.random() * this.musics.length);
         selectedMusics.push(this.musics[randomNum]);
         this.musics.splice(randomNum, 1);
       }
-      this.$store.commit("setSelectedMusics",selectedMusics);
-
+      this.$store.commit("setSelectedMusics", selectedMusics);
     },
   },
   data() {
     return {
       musics: musics,
-    }
+    };
   },
 };
 </script>
