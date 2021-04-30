@@ -9,6 +9,8 @@ export default new Vuex.Store({
     score: 0,
     scores: [],
     selectedMusics: [],
+    access_token: null,
+    refresh_token: null,
   },
   mutations: {
     setScore(state, score) {
@@ -19,6 +21,12 @@ export default new Vuex.Store({
     },
     setSelectedMusics(state, selectedMusics) {
       state.selectedMusics = selectedMusics;
+    },
+    setAccessToken(state, access_token) {
+      state.access_token = access_token;
+    },
+    setRefreshToken(state, refresh_token) {
+      state.refresh_token = refresh_token;
     },
   },
   actions: {},
