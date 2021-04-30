@@ -224,9 +224,7 @@
 </template>
 
 <script>
-import song from "@/assets/musics/other_californication.wav";
 import { mapState } from "vuex";
-//import musics from '@/assets/musics/musicas.json'
 
 export default {
   data() {
@@ -245,7 +243,9 @@ export default {
   computed: mapState(["scores", "selectedMusics"]),
   methods: {
     loadLevel(levelInfo) {
-      this.music = new Audio(song);
+      this.music = new Audio(
+        "https://p.scdn.co/mp3-preview/bd704fc71292e55c898dab17f24e9f89e17607b6?cid=aaf337dd7e484f4ba1735acef90ea795"
+      );
       this.music.crossOrigin = "anonymous";
       this.music.play();
 
