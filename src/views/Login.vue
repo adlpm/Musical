@@ -154,10 +154,10 @@
         <div
           class="chrome shine play"
           @click="login"
-          data-text="ENTER TO PLAY"
-          style="--shine-delay: 1s"
+          data-text="PLAY"
+          style="--shine-delay: 1s; margin: 2rem 0 6rem"
         >
-          ENTER TO PLAY
+          PLAY
           <span class="spark spark-offset"></span>
         </div>
 
@@ -599,7 +599,18 @@ export default {
 }
 
 .desc {
-  font-size: 2rem;
+  background-image: linear-gradient(
+    #2989cc 0%,
+    #d3e5ec 50%,
+    #592451 51%,
+    #b3628d 55%,
+    #592451 59%,
+    #b3628d 65%,
+    #ac86a6 75%,
+    #b3628d 100%
+  );
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 @keyframes blip {
