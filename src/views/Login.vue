@@ -1,10 +1,8 @@
 <template>
   <div id="login">
     <h1>SONGS</h1>
-    <p>
-      Um Jogo de trivia que testa se você realmente conhece as músicas que ouve!
-    </p>
-    <p>Conecte-se com o spotify para jogar</p>
+    <p>A trivia game that tests knowledge about songs you listen!</p>
+    <p>Connect with Spotify to play</p>
     <button @click="login">Login</button>
   </div>
 </template>

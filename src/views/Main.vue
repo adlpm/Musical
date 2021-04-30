@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="main">
     <div
       class="background-80s animated-clouds stars"
       style="--background-height: 100vh"
@@ -227,7 +227,7 @@ import musics from "@/assets/musics/musicas.json";
 import { mapState } from "vuex";
 
 export default {
-  name: "Home",
+  name: "Main",
   methods: {
     toGame() {
       this.selectRandomMusics();
@@ -263,7 +263,7 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.main {
   /* height: 100vh; */
   width: 100vw;
 }
