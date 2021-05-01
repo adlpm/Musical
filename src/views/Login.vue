@@ -228,22 +228,37 @@
 
 <script>
 import querystring from "querystring";
+import Cookies from "js-cookie";
 
 export default {
   name: "Login",
   methods: {
     login() {
       const url = "https://accounts.spotify.com/authorize?";
-      const scope = "user-read-private user-read-email";
+      const scope = "user-read-private user-read-email user-library-read";
+      var stateKey = "spotify_auth_state";
+      var state = this.generateRandomString(16);
+      Cookies.set(stateKey, state);
       const queryString = querystring.stringify({
         response_type: "code",
         client_id: process.env.VUE_APP_SPOTIFY_API_CLIENT_ID,
         scope: scope,
         redirect_uri: process.env.VUE_APP_SPOTIFY_REDIRECT_URL,
         show_dialog: true,
+        state: state,
       });
 
       window.location = url + queryString;
+    },
+    generateRandomString(length) {
+      var text = "";
+      var possible =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+      return text;
     },
   },
 };
