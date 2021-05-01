@@ -216,62 +216,65 @@ export default {
   async mounted() {
     const code = this.$route.query.code || null;
     const state = this.$route.query.state || null;
+    const error = this.$route.query.error || null;
     var stateKey = "spotify_auth_state";
     const storedState = Cookies.get(stateKey) || null;
 
-    if (state === null || state !== storedState) {
+    if (state === null || state !== storedState || error) {
       this.$router.push("/login");
       alert("Error when login in. Please, try again!");
-    }
+    } else {
+      const params = new URLSearchParams();
+      params.append("code", code);
+      params.append("grant_type", "authorization_code");
+      params.append("redirect_uri", process.env.VUE_APP_SPOTIFY_REDIRECT_URL);
 
-    const params = new URLSearchParams();
-    params.append("code", code);
-    params.append("grant_type", "authorization_code");
-    params.append("redirect_uri", process.env.VUE_APP_SPOTIFY_REDIRECT_URL);
+      try {
+        const { data } = await axios({
+          method: "post",
+          url: "https://accounts.spotify.com/api/token",
+          data: params,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization:
+              "Basic " +
+              new Buffer(
+                process.env.VUE_APP_SPOTIFY_API_CLIENT_ID +
+                  ":" +
+                  process.env.VUE_APP_SPOTIFY_API_CLIENT_SECRET
+              ).toString("base64"),
+          },
+          json: true,
+        });
 
-    try {
-      const { data } = await axios({
-        method: "post",
-        url: "https://accounts.spotify.com/api/token",
-        data: params,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization:
-            "Basic " +
-            new Buffer(
-              process.env.VUE_APP_SPOTIFY_API_CLIENT_ID +
-                ":" +
-                process.env.VUE_APP_SPOTIFY_API_CLIENT_SECRET
-            ).toString("base64"),
-        },
-        json: true,
-      });
+        const access_token = data.access_token;
+        const refresh_token = data.refresh_token;
 
-      const access_token = data.access_token;
-      const refresh_token = data.refresh_token;
-
-      await axios.post(
-        process.env.VUE_APP_API_BASE_URL,
-        {
-          code: access_token,
-        },
-        {
-          "Content-Type": "application/json",
+        try {
+          await axios.post(
+            process.env.VUE_APP_API_BASE_URL,
+            {
+              code: access_token,
+            },
+            {
+              "Content-Type": "application/json",
+            }
+          );
+        } catch (error) {
+          console.log(error);
+          this.$route.push("/login");
         }
-      );
 
-      this.$store.commit("setAccessToken", access_token);
-      this.$store.commit("setRefreshToken", refresh_token);
+        this.$store.commit("setAccessToken", access_token);
+        this.$store.commit("setRefreshToken", refresh_token);
 
-      localStorage.setItem(
-        "songs",
-        JSON.stringify({ access_token, refresh_token })
-      );
+        localStorage.setItem("songs", JSON.stringify({ refresh_token }));
 
-      this.$router.push("/main");
-    } catch (error) {
-      console.log(error);
-      this.router.push("/login");
+        this.$router.push("/main");
+      } catch (error) {
+        console.log(error);
+        this.router.push("/login");
+      }
     }
   },
 };

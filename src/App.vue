@@ -17,12 +17,14 @@ export default {
       const info = localStorage.getItem("songs");
 
       if (!info) {
+        this.$router.push("/login");
         return;
       }
 
       const refresh_token = JSON.parse(info).refresh_token;
 
       if (!refresh_token) {
+        this.$router.push("/login");
         return;
       }
 
@@ -50,25 +52,24 @@ export default {
           json: true,
         });
 
-        const access_token = data.access_token;
+        this.$router.push("/main");
 
-        localStorage.setItem(
-          "songs",
-          JSON.stringify({ access_token, refresh_token })
-        );
+        const access_token = data.access_token;
         this.$store.commit("setAccessToken", access_token);
 
-        await axios.post(
-          process.env.VUE_APP_API_BASE_URL,
-          {
-            code: access_token,
-          },
-          {
-            "Content-Type": "application/json",
-          }
-        );
-
-        this.$router.push("/main");
+        try {
+          await axios.post(
+            process.env.VUE_APP_API_BASE_URL,
+            {
+              code: access_token,
+            },
+            {
+              "Content-Type": "application/json",
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
       } catch (error) {
         console.log(error);
       }
