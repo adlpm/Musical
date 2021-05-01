@@ -58,7 +58,7 @@ export default {
         );
         this.$store.commit("setAccessToken", access_token);
 
-        axios.post(
+        await axios.post(
           process.env.VUE_APP_API_BASE_URL,
           {
             code: access_token,

@@ -250,7 +250,7 @@ export default {
       const access_token = data.access_token;
       const refresh_token = data.refresh_token;
 
-      axios.post(
+      await axios.post(
         process.env.VUE_APP_API_BASE_URL,
         {
           code: access_token,

@@ -9,15 +9,19 @@
       },
       {
         "title": "aaaaaa",
-        "artist": "artist_aaaa"
+        "artist": "artist_aaaa",
+        "rightOption": false
+        
       },
       {
         "title": "bbbbbb",
-        "artist": "artist_bbbbbb"
+        "artist": "artist_bbbbbb",
+        "rightOption": false
       },
       {
         "title": "ccccc",
-        "artist": "artist_ccccc"
+        "artist": "artist_ccccc",
+        "rightOption": false
       }
     ]
   },
@@ -31,15 +35,18 @@
       },
       {
         "title": "ddddd",
-        "artist": "artist_dddd"
+        "artist": "artist_dddd",
+        "rightOption": false
       },
       {
         "title": "eeeee",
-        "artist": "artist_eeee"
+        "artist": "artist_eeee",
+        "rightOption": false
       },
       {
         "title": "fffffff",
-        "artist": "artist_fffff"
+        "artist": "artist_fffff",
+        "rightOption": false
       }
     ]
   },
@@ -53,15 +60,18 @@
       },
       {
         "title": "ddddd",
-        "artist": "artist_dddd"
+        "artist": "artist_dddd",
+        "rightOption": false
       },
       {
         "title": "eeeee",
-        "artist": "artist_eeee"
+        "artist": "artist_eeee",
+        "rightOption": false
       },
       {
         "title": "fffffff",
-        "artist": "artist_fffff"
+        "artist": "artist_fffff",
+        "rightOption": false
       }
     ]
   }

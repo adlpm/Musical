@@ -225,6 +225,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { debounce } from "lodash";
 
 export default {
   data() {
@@ -343,11 +344,14 @@ export default {
       } else {
         event.srcElement.style.background = "#f44336";
       }
-      const self = this;
-      setTimeout(function () {
-        self.$router.push("/score");
-      }, 5000);
+      this.toScore();
     },
+    toScore() {
+      this.$router.push("/score");
+    },
+  },
+  created() {
+    this.toScore = debounce(this.toScore, 5000);
   },
 };
 </script>
