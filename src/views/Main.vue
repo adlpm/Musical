@@ -253,12 +253,6 @@ export default {
     };
   },
   computed: mapState(["access_token", "refresh_token"]),
-  mounted() {
-    if (this.access_token && this.refresh_token) {
-      console.log("acess token", this.access_token);
-      console.log("refresh token", this.refresh_token);
-    }
-  },
 };
 </script>
 
