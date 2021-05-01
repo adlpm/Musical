@@ -251,7 +251,7 @@ export default {
       const refresh_token = data.refresh_token;
 
       axios.post(
-        process.env.VUE_APP_API_KEY,
+        process.env.VUE_APP_API_BASE_URL,
         {
           code: access_token,
         },
