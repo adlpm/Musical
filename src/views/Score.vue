@@ -4,6 +4,7 @@
       class="background-80s animated-clouds stars"
       style="--background-height: 100vh"
     >
+      <i class="fas fa-arrow-left" @click="toMain"></i>
       <div class="sun"></div>
       <div
         class="grid"
@@ -229,11 +230,24 @@ export default {
   computed: mapState(["score", "scores"]),
   mounted() {
     this.topScores = this.scores.slice(0, 5);
+    console.log(this.scores);
+  },
+  methods: {
+    toMain() {
+      this.$router.push("/main");
+    },
   },
 };
 </script>
 
 <style scoped>
+i {
+  color: #fff;
+  font-size: 2rem;
+  margin: 2rem;
+  cursor: pointer;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700,900|Dancing+Script);
 
 @font-face {

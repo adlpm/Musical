@@ -225,7 +225,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { debounce } from "lodash";
+// import { debounce } from "lodash";
 
 export default {
   data() {
@@ -234,17 +234,22 @@ export default {
       music: null,
       isPlaying: false,
       count: 0,
-      score: 20000,
+      score: 30000,
+      totalScore: 0,
       options: [],
     };
   },
   mounted() {
     this.loadCurrentLevel();
+    console.log(this.selectedMusics);
   },
   computed: mapState(["scores", "selectedMusics"]),
   methods: {
     loadLevel(levelInfo) {
-      const url = "https://storage.marquesconsult.com.br/deleteme/stereo_file1.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=MARQUESCONSULT%2F20210501%2F%2Fs3%2Faws4_request&X-Amz-Date=20210501T012147Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=19970585d6149ac293da696b6a923dbfc1654ba700e58fdb956ff766796fc1c2"
+      this.score = 30000;
+      this.count = 0;
+      const url =
+        "https://storage.marquesconsult.com.br/deleteme/stereo_file1.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=MARQUESCONSULT%2F20210501%2F%2Fs3%2Faws4_request&X-Amz-Date=20210501T012147Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=19970585d6149ac293da696b6a923dbfc1654ba700e58fdb956ff766796fc1c2";
       //const url = "https://p.scdn.co/mp3-preview/bd704fc71292e55c898dab17f24e9f89e17607b6?cid=aaf337dd7e484f4ba1735acef90ea795"
       this.music = new Audio(url);
       this.music.crossOrigin = "anonymous";
@@ -309,12 +314,12 @@ export default {
       setInterval(function () {
         if (self.isPlaying) {
           self.count++;
-          self.score -= 1000;
+          self.score--;
         }
-      }, 1000);
+      }, 1);
       setTimeout(function () {
         self.optionClicked();
-      }, 20000);
+      }, 30000);
     },
     loadCurrentLevel() {
       if (this.currentLevel < this.selectedMusics.length) {
@@ -324,10 +329,19 @@ export default {
       this.$router.push("/score");
     },
     optionClicked(option, event) {
+      if (option === undefined) {
+        this.isPlaying = false;
+        this.musicVerification(false, event);
+        this.currentLevel++;
+        setTimeout(() => {
+          this.loadCurrentLevel();
+        }, 1000);
+      }
+
       if (this.isPlaying && option.rightOption != undefined) {
         this.music.pause();
         this.isPlaying = false;
-        this.musicVerification(true, event);
+        this.musicVerification(option.rightOption, event);
         this.currentLevel++;
         setTimeout(() => {
           this.loadCurrentLevel();
@@ -337,21 +351,20 @@ export default {
     musicVerification(bool, event) {
       if (bool) {
         event.srcElement.style.background = "#4CAF50";
-        this.$store.commit("setScore", this.score);
-        this.scores.push(this.score);
-        this.scores.sort().reverse();
-        this.$store.commit("setScores", this.scores);
-      } else {
+        this.totalScore += this.score;
+        console.log(this.totalScore, this.currentLevel);
+        this.$store.commit("setScore", this.totalScore);
+      } else if (event != undefined) {
         event.srcElement.style.background = "#f44336";
       }
-      this.toScore();
+
+      // Trocar 1 para 4 depois
+      if (this.currentLevel === 1) {
+        this.scores.push(this.totalScore);
+        this.scores.sort().reverse();
+        this.$store.commit("setScores", this.scores);
+      }
     },
-    toScore() {
-      this.$router.push("/score");
-    },
-  },
-  created() {
-    this.toScore = debounce(this.toScore, 5000);
   },
 };
 </script>

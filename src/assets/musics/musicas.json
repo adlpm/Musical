@@ -74,5 +74,31 @@
         "rightOption": false
       }
     ]
+  },
+  {
+    "path":"https://github.com/adlpm/Musical/blob/main/src/assets/musics/ac-dc.mp3?raw=true",
+    "options": [
+      {
+        "title":"Number of the Beast",
+        "artist": "Iron Maiden",
+        "rightOption": true
+      },
+      {
+        "title": "aaaaaa",
+        "artist": "artist_aaaa",
+        "rightOption": false
+        
+      },
+      {
+        "title": "bbbbbb",
+        "artist": "artist_bbbbbb",
+        "rightOption": false
+      },
+      {
+        "title": "ccccc",
+        "artist": "artist_ccccc",
+        "rightOption": false
+      }
+    ]
   }
 ]
