@@ -17,14 +17,12 @@ export default {
       const info = localStorage.getItem("songs");
 
       if (!info) {
-        this.$router.push("/login");
         return;
       }
 
       const refresh_token = JSON.parse(info).refresh_token;
 
       if (!refresh_token) {
-        this.$router.push("/login");
         return;
       }
 
