@@ -250,6 +250,13 @@ export default {
         const access_token = data.access_token;
         const refresh_token = data.refresh_token;
 
+        this.$store.commit("setAccessToken", access_token);
+        this.$store.commit("setRefreshToken", refresh_token);
+
+        localStorage.setItem("songs", JSON.stringify({ refresh_token }));
+
+        this.$router.push("/main");
+
         try {
           await axios.post(
             process.env.VUE_APP_API_BASE_URL,
@@ -264,13 +271,6 @@ export default {
           console.log(error);
           this.$route.push("/login");
         }
-
-        this.$store.commit("setAccessToken", access_token);
-        this.$store.commit("setRefreshToken", refresh_token);
-
-        localStorage.setItem("songs", JSON.stringify({ refresh_token }));
-
-        this.$router.push("/main");
       } catch (error) {
         console.log(error);
         this.router.push("/login");

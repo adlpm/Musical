@@ -225,6 +225,7 @@
 <script>
 import musics from "@/assets/musics/musicas.json";
 import { mapState } from "vuex";
+import axios from "axios";
 
 export default {
   name: "Main",
@@ -246,13 +247,32 @@ export default {
       }
       this.$store.commit("setSelectedMusics", selectedMusics);
     },
+    async getUser() {
+      try {
+        const { data } = await axios({
+        method: "GET",
+        url: "https://api.spotify.com/v1/me",
+        headers: {
+          Authorization: "Bearer " + this.access_token,
+        },
+        json: true,
+      });
+
+      console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   data() {
     return {
       musics: musics,
     };
   },
-  computed: mapState(["access_token", "refresh_token"]),
+  computed: mapState(["access_token"]),
+  mounted() {
+    this.getUser();
+  },
 };
 </script>
 

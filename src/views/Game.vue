@@ -244,7 +244,8 @@ export default {
   computed: mapState(["scores", "selectedMusics"]),
   methods: {
     loadLevel(levelInfo) {
-      const url = "https://storage.marquesconsult.com.br/deleteme/stereo_file1.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=MARQUESCONSULT%2F20210501%2F%2Fs3%2Faws4_request&X-Amz-Date=20210501T012147Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=19970585d6149ac293da696b6a923dbfc1654ba700e58fdb956ff766796fc1c2"
+      const url =
+        "https://storage.marquesconsult.com.br/deleteme/stereo_file1.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=MARQUESCONSULT%2F20210501%2F%2Fs3%2Faws4_request&X-Amz-Date=20210501T012147Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=19970585d6149ac293da696b6a923dbfc1654ba700e58fdb956ff766796fc1c2";
       //const url = "https://p.scdn.co/mp3-preview/bd704fc71292e55c898dab17f24e9f89e17607b6?cid=aaf337dd7e484f4ba1735acef90ea795"
       this.music = new Audio(url);
       this.music.crossOrigin = "anonymous";
