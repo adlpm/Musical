@@ -21,12 +21,14 @@ export default {
       }
 
       const refresh_token = JSON.parse(info).refresh_token;
+      const user = JSON.parse(info).user;
 
       if (!refresh_token) {
         return;
       }
 
       this.$store.commit("setRefreshToken", refresh_token);
+      this.$store.commit("setUser", user);
 
       const params = new URLSearchParams();
       params.append("refresh_token", refresh_token);
