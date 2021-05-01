@@ -224,6 +224,57 @@ export default {
       this.$router.push("/login");
       alert("Error when login in. Please, try again!");
     } else {
+      const { access_token, refresh_token, error } = await this.getToken(code);
+
+      if (error) {
+        this.$route.push("/login");
+        return;
+      }
+
+      const user = await this.getUser(access_token);
+
+      this.$store.commit("setUser", user);
+      this.$store.commit("setAccessToken", access_token);
+      this.$store.commit("setRefreshToken", refresh_token);
+
+      localStorage.setItem("songs", JSON.stringify({ refresh_token, user }));
+
+      this.$router.push("/main");
+
+      try {
+        await axios.post(
+          process.env.VUE_APP_API_BASE_URL,
+          {
+            code: access_token,
+          },
+          {
+            "Content-Type": "application/json",
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  },
+  methods: {
+    async getUser(access_token) {
+      try {
+        const { data } = await axios({
+          method: "GET",
+          url: "https://api.spotify.com/v1/me",
+          headers: {
+            Authorization: "Bearer " + access_token,
+          },
+          json: true,
+        });
+
+        return data;
+      } catch (error) {
+        console.log("get user error", error);
+        return null;
+      }
+    },
+    async getToken(code) {
       const params = new URLSearchParams();
       params.append("code", code);
       params.append("grant_type", "authorization_code");
@@ -247,35 +298,12 @@ export default {
           json: true,
         });
 
-        const access_token = data.access_token;
-        const refresh_token = data.refresh_token;
-
-        try {
-          await axios.post(
-            process.env.VUE_APP_API_BASE_URL,
-            {
-              code: access_token,
-            },
-            {
-              "Content-Type": "application/json",
-            }
-          );
-        } catch (error) {
-          console.log(error);
-          this.$route.push("/login");
-        }
-
-        this.$store.commit("setAccessToken", access_token);
-        this.$store.commit("setRefreshToken", refresh_token);
-
-        localStorage.setItem("songs", JSON.stringify({ refresh_token }));
-
-        this.$router.push("/main");
+        return data;
       } catch (error) {
-        console.log(error);
-        this.router.push("/login");
+        console.log("get token error", error);
+        return error;
       }
-    }
+    },
   },
 };
 </script>

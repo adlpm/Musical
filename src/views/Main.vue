@@ -224,7 +224,6 @@
 
 <script>
 import musics from "@/assets/musics/musicas.json";
-import { mapState } from "vuex";
 
 export default {
   name: "Main",
@@ -252,7 +251,6 @@ export default {
       musics: musics,
     };
   },
-  computed: mapState(["access_token", "refresh_token"]),
 };
 </script>
 
