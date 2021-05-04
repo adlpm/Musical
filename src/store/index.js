@@ -7,7 +7,6 @@ export default new Vuex.Store({
   state: {
     score: 0,
     scores: [],
-    selectedMusics: [],
     access_token: null,
     refresh_token: null,
     user: null,
@@ -18,9 +17,6 @@ export default new Vuex.Store({
     },
     setScores(state, scores) {
       state.scores = scores;
-    },
-    setSelectedMusics(state, selectedMusics) {
-      state.selectedMusics = selectedMusics;
     },
     setAccessToken(state, access_token) {
       state.access_token = access_token;

@@ -35,11 +35,6 @@ const routes = [
     name: "score",
     component: () => import("../views/Score.vue"),
   },
-  {
-    path: "/loading-screen",
-    name: "LoadingScreen",
-    component: () => import("../views/LoadingScreen.vue"),
-  },
 ];
 
 const router = new VueRouter({

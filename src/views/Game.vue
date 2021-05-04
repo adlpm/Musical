@@ -156,9 +156,9 @@
           <button
             @click="optionClicked(option, $event)"
             v-for="option in options"
-            :key="option.title"
+            :key="option.artist"
           >
-            {{ option.title }}
+            {{ option.artist }}
           </button>
         </div>
       </div>
@@ -243,17 +243,19 @@ export default {
       score: 30000,
       totalScore: 0,
       options: [],
-      selectedMusics: null,
+      selectedMusics: [],
       loading: false,
     };
   },
   async mounted() {
     try {
       this.loading = true;
-      this.selectedMusics = await axios.post(process.env.VUE_APP_API_BASE_URL, {
-        code: this.access_token,
-        songs: 5,
-      }).data;
+      const response = await axios
+        .post(process.env.VUE_APP_API_BASE_URL, {
+          code: this.access_token,
+          songs: 5,
+        });
+      this.selectedMusics = response.data;
     } catch (error) {
       console.log(error);
     } finally {
@@ -266,10 +268,7 @@ export default {
     loadLevel(levelInfo) {
       this.score = 30000;
       this.count = 0;
-      const url =
-        "https://storage.marquesconsult.com.br/deleteme/stereo_file1.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=MARQUESCONSULT%2F20210501%2F%2Fs3%2Faws4_request&X-Amz-Date=20210501T012147Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=19970585d6149ac293da696b6a923dbfc1654ba700e58fdb956ff766796fc1c2";
-      //const url = "https://p.scdn.co/mp3-preview/bd704fc71292e55c898dab17f24e9f89e17607b6?cid=aaf337dd7e484f4ba1735acef90ea795"
-      this.music = new Audio(url);
+      this.music = new Audio(levelInfo.url);
       this.music.crossOrigin = "anonymous";
       this.music.play();
 
@@ -377,7 +376,7 @@ export default {
       }
 
       // Trocar 1 para 4 depois
-      if (this.currentLevel === 1) {
+      if (this.currentLevel === 4) {
         this.scores.push(this.totalScore);
         this.scores.sort().reverse();
         this.$store.commit("setScores", this.scores);
