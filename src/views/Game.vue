@@ -268,6 +268,9 @@ export default {
     loadLevel(levelInfo) {
       this.score = 30000;
       this.count = 0;
+      if (!!this.music && !this.music.paused) {
+        this.music.pause();
+      }
       this.music = new Audio(levelInfo.url);
       this.music.crossOrigin = "anonymous";
       this.music.play();
