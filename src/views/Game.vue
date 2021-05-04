@@ -148,7 +148,7 @@
       <div class="road-off"></div>
       <div class="overlay"></div>
 
-      <div class="text">
+      <div class="text" v-if="!loading">
         <div class="outrun glow">{{ score }}</div>
 
         <div class="options" style="margin: 2rem 0 3rem">
@@ -220,14 +220,20 @@
     </svg>
 
     <canvas id="canvas"></canvas>
+
+    <SoundWave v-if="loading" />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-// import { debounce } from "lodash";
+import axios from "axios";
+import SoundWave from "@/components/SoundWave";
 
 export default {
+  components: {
+    SoundWave,
+  },
   data() {
     return {
       currentLevel: 0,
@@ -237,13 +243,25 @@ export default {
       score: 30000,
       totalScore: 0,
       options: [],
+      selectedMusics: null,
+      loading: false,
     };
   },
-  mounted() {
-    this.loadCurrentLevel();
-    console.log(this.selectedMusics);
+  async mounted() {
+    try {
+      this.loading = true;
+      this.selectedMusics = await axios.post(process.env.VUE_APP_API_BASE_URL, {
+        code: this.access_token,
+        songs: 5,
+      }).data;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.loading = false;
+      this.loadCurrentLevel();
+    }
   },
-  computed: mapState(["scores", "selectedMusics"]),
+  computed: mapState(["scores", "access_token"]),
   methods: {
     loadLevel(levelInfo) {
       this.score = 30000;

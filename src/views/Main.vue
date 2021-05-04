@@ -229,7 +229,7 @@ export default {
   name: "Main",
   methods: {
     toGame() {
-      this.$router.push("/loading-screen");
+      this.$router.push("/game");
     },
     toScore() {
       this.$router.push("/score");
