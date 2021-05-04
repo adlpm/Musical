@@ -52,10 +52,12 @@ export default {
           json: true,
         });
 
-        this.$router.push("/main");
-
         const access_token = data.access_token;
         this.$store.commit("setAccessToken", access_token);
+
+        if (this.$route.name !== "Main") {
+          this.$router.push("/main");
+        }
       } catch (error) {
         console.log(error);
       }
