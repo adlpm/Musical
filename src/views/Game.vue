@@ -250,12 +250,12 @@ export default {
   async mounted() {
     try {
       this.loading = true;
-      const response = await axios
-        .post(process.env.VUE_APP_API_BASE_URL, {
+      this.selectedMusics = (
+        await axios.post(process.env.VUE_APP_API_BASE_URL, {
           code: this.access_token,
           songs: 5,
-        });
-      this.selectedMusics = response.data;
+        })
+      ).data;
     } catch (error) {
       console.log(error);
     } finally {
@@ -337,9 +337,10 @@ export default {
           self.score--;
         }
       }, 1);
-      setTimeout(function () {
+
+      this.music.onended = function () {
         self.optionClicked();
-      }, 30000);
+      };
     },
     loadCurrentLevel() {
       if (this.currentLevel < this.selectedMusics.length) {
