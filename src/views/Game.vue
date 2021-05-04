@@ -221,18 +221,18 @@
 
     <canvas id="canvas"></canvas>
 
-    <SoundWave v-if="loading" />
+    <Loading v-if="loading" />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import axios from "axios";
-import SoundWave from "@/components/SoundWave";
+import Loading from "@/components/Loading";
 
 export default {
   components: {
-    SoundWave,
+    Loading,
   },
   data() {
     return {
