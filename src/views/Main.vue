@@ -229,21 +229,10 @@ export default {
   name: "Main",
   methods: {
     toGame() {
-      this.selectRandomMusics();
-      this.$router.push("/game");
+      this.$router.push("/loading-screen");
     },
     toScore() {
       this.$router.push("/score");
-    },
-    selectRandomMusics() {
-      const totalMusics = 2;
-      const selectedMusics = [];
-      for (let i = 0; i < totalMusics; i++) {
-        const randomNum = Math.floor(Math.random() * this.musics.length);
-        selectedMusics.push(this.musics[randomNum]);
-        this.musics.splice(randomNum, 1);
-      }
-      this.$store.commit("setSelectedMusics", selectedMusics);
     },
   },
   data() {

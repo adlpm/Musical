@@ -240,20 +240,6 @@ export default {
       localStorage.setItem("songs", JSON.stringify({ refresh_token, user }));
 
       this.$router.push("/main");
-
-      try {
-        await axios.post(
-          process.env.VUE_APP_API_BASE_URL,
-          {
-            code: access_token,
-          },
-          {
-            "Content-Type": "application/json",
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
     }
   },
   methods: {

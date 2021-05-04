@@ -56,20 +56,6 @@ export default {
 
         const access_token = data.access_token;
         this.$store.commit("setAccessToken", access_token);
-
-        try {
-          await axios.post(
-            process.env.VUE_APP_API_BASE_URL,
-            {
-              code: access_token,
-            },
-            {
-              "Content-Type": "application/json",
-            }
-          );
-        } catch (error) {
-          console.log(error);
-        }
       } catch (error) {
         console.log(error);
       }
