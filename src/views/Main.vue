@@ -223,7 +223,6 @@
 </template>
 
 <script>
-import musics from "@/assets/musics/musicas.json";
 
 export default {
   name: "Main",
@@ -236,9 +235,7 @@ export default {
     },
   },
   data() {
-    return {
-      musics: musics,
-    };
+    return {}
   },
 };
 </script>
