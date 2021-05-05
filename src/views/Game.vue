@@ -328,7 +328,7 @@ export default {
       this.music.play();
       renderFrame();
 
-      this.options = levelInfo.options;
+      this.options = this.shuffle(levelInfo.options);
       this.isPlaying = true;
       const self = this;
       setInterval(function () {
@@ -385,6 +385,22 @@ export default {
         this.scores.sort().reverse();
         this.$store.commit("setScores", this.scores);
       }
+    },
+    shuffle(array) {
+      var currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
+
+      while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
     },
   },
 };
