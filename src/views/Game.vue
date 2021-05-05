@@ -221,7 +221,14 @@
 
     <canvas id="canvas"></canvas>
 
-    <Loading v-if="loading" />
+    <div id="loading" v-if="loading">
+      <Loading />
+      <div class="chrome shine desc" style="z-index: 10">
+        <span class="spark"></span>
+        <p style="text-align: center">We are getting your songs from Spotify</p>
+        <p style="text-align: center">Loading can take up to five minutes</p>
+      </div>
+    </div>
   </div>
 </template>
 
