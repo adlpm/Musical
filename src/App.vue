@@ -6,6 +6,7 @@
 
 <script>
 import axios from "axios";
+import getEnv from "@/utils/env";
 
 export default {
   name: "App",
@@ -44,9 +45,9 @@ export default {
             Authorization:
               "Basic " +
               new Buffer(
-                process.env.VUE_APP_SPOTIFY_API_CLIENT_ID +
+                getEnv("VUE_APP_SPOTIFY_API_CLIENT_ID") +
                   ":" +
-                  process.env.VUE_APP_SPOTIFY_API_CLIENT_SECRET
+                  getEnv("VUE_APP_SPOTIFY_API_CLIENT_SECRET")
               ).toString("base64"),
           },
           json: true,

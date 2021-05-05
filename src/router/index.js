@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../views/Main.vue";
+import getEnv from "@/utils/env";
 
 Vue.use(VueRouter);
 
@@ -39,7 +40,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
+  base: getEnv("BASE_URL"),
   routes,
 });
 

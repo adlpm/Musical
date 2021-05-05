@@ -229,6 +229,7 @@
 <script>
 import querystring from "querystring";
 import Cookies from "js-cookie";
+import getEnv from "@/utils/env";
 
 export default {
   name: "Login",
@@ -241,9 +242,9 @@ export default {
       Cookies.set(stateKey, state);
       const queryString = querystring.stringify({
         response_type: "code",
-        client_id: process.env.VUE_APP_SPOTIFY_API_CLIENT_ID,
+        client_id: getEnv("VUE_APP_SPOTIFY_API_CLIENT_ID"),
         scope: scope,
-        redirect_uri: process.env.VUE_APP_SPOTIFY_REDIRECT_URL,
+        redirect_uri: getEnv("VUE_APP_SPOTIFY_REDIRECT_URL"),
         show_dialog: true,
         state: state,
       });

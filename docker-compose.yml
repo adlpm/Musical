@@ -1,0 +1,12 @@
+version: '3.7'
+
+services: 
+    app:
+        image: app
+        environment: 
+            VUE_APP_SPOTIFY_API_CLIENT_ID: eca328012d8b4c1b89602fe3ff679d07
+            VUE_APP_SPOTIFY_API_CLIENT_SECRET: cb7fe48f7d4e42c7aec75265b34d2d79
+            VUE_APP_SPOTIFY_REDIRECT_URL: http://localhost:8080/callback
+            VUE_APP_API_BASE_URL: http://localhost:5000
+        ports:
+            - 8080:80

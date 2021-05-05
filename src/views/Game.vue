@@ -236,6 +236,7 @@
 import { mapState } from "vuex";
 import axios from "axios";
 import Loading from "@/components/Loading";
+import getEnv from "@/utils/env";
 
 export default {
   components: {
@@ -258,7 +259,7 @@ export default {
     try {
       this.loading = true;
       this.selectedMusics = (
-        await axios.post(process.env.VUE_APP_API_BASE_URL, {
+        await axios.post(getEnv("VUE_APP_API_BASE_URL"), {
           code: this.access_token,
           songs: 5,
         })

@@ -210,6 +210,7 @@
 <script>
 import axios from "axios";
 import Cookies from "js-cookie";
+import getEnv from "@/utils/env";
 
 export default {
   name: "Callback",
@@ -264,7 +265,7 @@ export default {
       const params = new URLSearchParams();
       params.append("code", code);
       params.append("grant_type", "authorization_code");
-      params.append("redirect_uri", process.env.VUE_APP_SPOTIFY_REDIRECT_URL);
+      params.append("redirect_uri", getEnv("VUE_APP_SPOTIFY_REDIRECT_URL"));
 
       try {
         const { data } = await axios({
@@ -276,9 +277,9 @@ export default {
             Authorization:
               "Basic " +
               new Buffer(
-                process.env.VUE_APP_SPOTIFY_API_CLIENT_ID +
+                getEnv("VUE_APP_SPOTIFY_API_CLIENT_ID") +
                   ":" +
-                  process.env.VUE_APP_SPOTIFY_API_CLIENT_SECRET
+                  getEnv("VUE_APP_SPOTIFY_API_CLIENT_SECRET")
               ).toString("base64"),
           },
           json: true,
