@@ -7,7 +7,7 @@
 <script>
 import axios from "axios";
 import getEnv from "@/utils/env";
-
+//Export block
 export default {
   name: "App",
   created() {
