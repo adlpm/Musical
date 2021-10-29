@@ -11,7 +11,7 @@ export default {
 <style scoped>
 .loader {
   z-index: 99;
-  color: #fafafa;
+  color: #fefefe;
   font-size: 90px;
   text-indent: -9999em;
   overflow: hidden;
