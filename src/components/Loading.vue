@@ -10,7 +10,7 @@ export default {
 
 <style scoped>
 .loader {
-  z-index: 99;
+  z-index: 999;
   color: #ffffff;
   font-size: 90px;
   text-indent: -9999em;
@@ -18,7 +18,7 @@ export default {
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  margin: 10rem auto;
+  margin: 15rem auto;
   position: relative;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
